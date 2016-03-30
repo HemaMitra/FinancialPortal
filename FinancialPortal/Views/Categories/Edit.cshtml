@@ -1,0 +1,54 @@
+﻿@model FinancialPortal.Models.Category
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h4>Edit Category</h4>
+
+<div class="smart-widget">
+    <div class="smart-widget-header">
+        Edit
+        <span class="smart-widget-option">
+            <a href="#" class="widget-collapse-option" data-toggle="collapse">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </span>
+    </div>
+    <div class="smart-widget-inner">
+        <div class="smart-widget-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CategoryId)
+                    @Html.HiddenFor(model => model.HouseHoldId)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-rounded back-color text-white" />
+                            <a href="@Url.Action("Index", "Categories")" class="btn btn-rounded text-white back-color">Back</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

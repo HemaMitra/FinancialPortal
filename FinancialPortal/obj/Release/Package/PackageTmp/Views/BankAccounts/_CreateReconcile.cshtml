@@ -1,0 +1,41 @@
+﻿@model FinancialPortal.Models.ReconcileViewModel
+<div class="smart-widget">
+    <div class="smart-widget-header">
+        Reconcile Account
+        <span class="smart-widget-option">
+            <a href="#" class="widget-collapse-option" data-toggle="collapse">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </span>
+    </div>
+    <div class="smart-widget-inner">
+        <div class="smart-widget-body">
+            <form action="@Url.Action("CreateReconcileTrans")" method="post" enctype="multipart/form-data" role="form">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                     <div class="row">  
+                         <div class="control-label col-md-5 col-xs-5"><strong>Reconciliation Amount</strong></div>
+                       
+                        <div class="col-md-7 col-xs-7">
+                            @Html.HiddenFor(model => model.bankAccountId)
+                            <input type="number" name="ReconciliationAmount" value="0" />
+                        </div>
+                    </div>
+                   </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Reconcile" class="btn btn-rounded text-white back-color" />
+                        </div>
+                    </div>
+                </div>
+                </form>
+</div>
+    </div>
+</div>
+
+
+
+

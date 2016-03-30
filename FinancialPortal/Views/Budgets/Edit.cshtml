@@ -1,0 +1,98 @@
+﻿@model FinancialPortal.Models.Budget
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<div class="smart-widget">
+    <div class="smart-widget-header">
+        Edit Budget
+        <span class="smart-widget-option">
+            <a href="#" class="widget-collapse-option" data-toggle="collapse">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </span>
+    </div>
+    <div class="smart-widget-inner">
+        <div class="smart-widget-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <h4>Edit Budget</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.BudgetId)
+                    @Html.HiddenFor(model => model.BudgetCrtDate)
+                    <div class="form-group">
+                        <div class="col-md-2 col-xs-2">
+                            <strong>HouseHold</strong>
+                        </div>
+                        <div class="col-md-10 col-sx-10">
+                            @Html.DropDownList("HouseHoldId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.HouseHoldId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 col-xs-2">
+                            <strong>Category</strong>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 col-xs-2">
+                            <strong>Budget Amount</strong>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.BudgetAmount, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BudgetAmount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2 col-xs-2">
+                            <strong>IsWithdrawl ?</strong>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsWithdrawl)
+                                @Html.ValidationMessageFor(model => model.IsWithdrawl, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 col-xs-2">
+                            <strong>Description</strong>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.BudgetDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BudgetDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-rounded text-white back-color" />
+                            <a href="@Url.Action("Index", "Budgets")" class="btn btn-rounded text-white back-color">Back</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

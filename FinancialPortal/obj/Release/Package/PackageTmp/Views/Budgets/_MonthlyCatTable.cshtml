@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FinancialPortal.Models.ActualVcBudgetedViewModel>
+
+@{
+    ViewBag.Title = "Categorised Table";
+}
+
+<div class="smart-widget">
+    <div class="smart-widget-header">
+        Monthly Categorised Expenses
+    </div>
+    <div class="smart-widget-inner">
+        <div class="smart-widget-body">
+            <div>
+                <table class="table table-border">
+                    <tr class="font-semi-bold">
+                        <td class="table-padding">Category</td>
+                        <td class="table-padding">Actual</td>
+                        <td>Budgeted</td>
+                    </tr>   
+                    
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.Category)</td>
+                            @if(item.ActualExp >= item.BudgetExp)
+                            { 
+                                <td class="text-danger">@Html.DisplayFor(m => item.ActualExp)</td>
+                            }
+                            else
+                            {
+                                <td>@Html.DisplayFor(m => item.ActualExp)</td>
+                            }
+                            <td>@Html.DisplayFor(m => item.BudgetExp)</td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

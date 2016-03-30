@@ -1,0 +1,150 @@
+﻿@model IEnumerable<FinancialPortal.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transactions Index";
+}
+<h4>Transactions for @Model.First().BankAccount.AccountName Account</h4>
+<h4 class="text-primary pull-right"><strong>Available Balance : @Model.First().BankAccount.Balance</strong></h4>
+<p>
+    <a href="@Url.Action("Create", "Transactions", new { bankAccountId = Model.FirstOrDefault().BankAccountId })" class="btn btn-sm btn-rounded back-color text-white">Create
+    </a>
+    <a href="#/Category" id="showBtn" class="btn btn-sm btn-rounded back-color text-white">View Transactions By Category</a>
+    <a href="#/all" id="showAll" class="btn btn-sm btn-rounded back-color text-white">All Transactions</a>
+    <a href="@Url.Action("Index", "BankAccounts")" class="btn btn-sm btn-rounded back-color text-white">Back</a>
+    
+</p>
+
+<H4 class="text-danger">@TempData["Overdraft"]</H4>
+
+
+<div id="all">
+    <table id="transData" class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BankAccount.AccountName)
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsWithdrawl)
+            </th>
+            <th>
+                Transaction<BR>Amount
+            </th>
+            <th>
+                Reconciliation<br />Amount
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            if (item.IsDeleted == false)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BankAccount.AccountName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsWithdrawl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReconciliationAmount)
+                    </td>
+                    <td>
+
+                        @item.TransactionDate.ToString("MMM dd, yyyy")
+                    </td>
+                    <td>
+                        @*<a href="@Url.Action("Details", "Transactions", new { id = item.TransactionId })" class="btn btn-sm btn-rounded back-color text-white">
+                            <i class="fa fa-book" title="Details"></i>
+                        </a>*@
+
+                        @if(item.TransactionDescription != "Reconciliation")
+                        { 
+                            <a href="@Url.Action("Edit", "Transactions", new { id = item.TransactionId })" class="btn btn-sm btn-rounded back-color text-white">
+                                <i class="fa fa-edit" title="Edit"></i>
+                            </a>
+                        }
+                        <a href="@Url.Action("Delete", "Transactions", new { id = item.TransactionId })" class="btn btn-sm btn-rounded back-color text-white">
+                            <i class="fa fa-trash-o" title="Delete"></i>
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<div id="Category">
+    <div class="row">
+        <div class="col-md-8 col-xs-8">
+            @Html.Action("_TransByCategory", "Transactions", new { id = Model.First().BankAccountId })   
+       </div>
+    </div>
+</div>
+
+<div id="incexp">
+    <div class="row">
+        <div class="col-md-8 col-xs-8">
+            @Html.Action("_TransByIncExp", "Transactions", new { id = Model.First().BankAccountId })  
+        </div>
+    </div>
+</div>
+     @section scripts{
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $("#showAll").hide();
+                $("#Category").hide();
+                $("#incexp").hide();
+                var flag = 0;
+                $("#showBtn").on("click",function () {
+                    if (flag == 1) {
+                        $("#showAll").show();
+                        $("#Category").hide();
+                        $("#all").hide();
+                        $("#incexp").show();
+                        $("#showBtn").html('Transactions By Category');
+                        flag = 0;
+                    }
+                    else
+                    {
+                        $("#showAll").show();
+                        $("#Category").show();
+                        $("#incexp").hide();
+                        $("#all").hide();
+                        $("#showBtn").html('Transactions By Income/Expense');
+                        flag = 1;
+                    }
+                });
+
+
+                $("#showAll").on("click", function () {
+                    $("#Category").hide();
+                    $("#incexp").hide();
+                    $("#all").show();
+                    $("#showAll").hide();
+                });
+
+                $('#transData').DataTable();
+            });
+
+
+        </script>
+
+
+    }

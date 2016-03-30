@@ -1,0 +1,51 @@
+﻿@model FinancialPortal.Models.Budget
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Budget Details</h4>
+
+<div class="smart-widget">
+    <div class="smart-widget-header">
+        Budget Details
+        <span class="smart-widget-option">
+            <a href="#" class="widget-collapse-option" data-toggle="collapse">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </span>
+    </div>
+    <div class="smart-widget-inner">
+        <div class="smart-widget-body">
+            <div>
+                <table class="table">
+                    <tr class="strong">
+                        <td>Creation date</td>
+                        <td>Category</td><td>HouseHold</td>
+                        <td>Budget Amount</td>
+                        <td>IsWithdrawl ?</td>
+                        <td>Description</td>
+                    </tr>
+                    <tr>
+                        <td>@Model.BudgetCrtDate.ToString("MMM dd, yyyy")</td>
+                        <td>@Html.DisplayFor(model => model.Category.CategoryName)</td>
+                        <td>@Html.DisplayFor(model => model.HouseHold.HouseHoldName)</td>
+                        <td>@Html.DisplayFor(model => model.BudgetAmount)</td>
+                        <td>@Html.DisplayFor(model => model.IsWithdrawl)</td>
+                        <td>@Html.DisplayFor(model => model.BudgetDescription)</td>
+                    </tr>
+                </table>
+            </div>
+            <p>
+                <a href="@Url.Action("Edit", "Budgets", new { id = Model.BudgetId })" class="btn btn-rounded text-white back-color">Edit</a>
+                
+                <a href="@Url.Action("Index", "Budgets")" class="btn btn-rounded text-white back-color">Back</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<FinancialPortal.Models.Budget>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Budget</h4>
+
+<p><a href="@Url.Action("Create","Budgets")" class="btn btn-rounded back-color text-white">Create New</a>
+        
+
+    <a href="#/Category" id="showBtn" class="btn btn-sm btn-rounded back-color text-white">View Budgeted Income/Expense</a>
+    <a href="#/all" id="showAll" class="btn btn-sm btn-rounded back-color text-white">All Items</a>
+    
+</p>
+
+<div id="incexp">
+    @Html.Action("_BudgetIncomeExpense", "Budgets")
+</div>        
+<br>
+<div class="col-md-6 col-xs-6" id="Category"></div>
+
+<div id="all">
+<table id="tabData" class="table">
+    <thead>
+    <tr>
+        <th>Create Date</th>
+        <th>Category</th>
+        <th>Budget Amount</th>
+        <th>Budget Description</th>
+        <th>IsWithdrawl ?</th>
+        <th></th>
+    </tr>
+    </thead>
+@foreach (var item in Model) {
+    <tr>
+        <td>@item.BudgetCrtDate.ToString("MMM dd, yyyy")</td>
+        <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+        <td>@Html.DisplayFor(modelItem => item.BudgetAmount)</td>
+        <td>@Html.DisplayFor(modelItem => item.BudgetDescription)</td>
+        <td>@Html.DisplayFor(modelItem => item.IsWithdrawl)</td>
+        <td>
+            <a href="@Url.Action("Edit", "Budgets", new { id = item.BudgetId })" class="btn btn-sm btn-rounded back-color text-white">
+                <i class="fa fa-edit" title="Edit"></i></a>
+            <a href="@Url.Action("Delete", "Budgets", new { id = item.BudgetId })" class="btn btn-sm btn-rounded back-color text-white">
+                <i class="fa fa-trash-o" title="Delete"></i></a>
+        </td>
+    </tr>
+}
+</table>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Category').load('/Budgets/_MonthlyCatTable/');
+            $("#showAll").hide();
+            $("#Category").show();
+            $("#all").hide();
+            $("#incexp").hide();
+
+            var flag = 0;
+            $("#showBtn").on("click", function () {
+                if (flag == 0) {
+                    $("#showAll").show();
+                    $("#incexp").show();
+                    $("#Category").hide();
+                    $("#all").hide();
+                    $("#showBtn").html('View Categorised Items');
+                    flag = 1;
+                }
+                else {
+                    $("#showAll").show();
+                    $("#Category").show();
+                    $("#incexp").hide();
+                    $("#all").hide();
+                    $("#showBtn").html('View Budgeted Income/Expense');
+                    flag = 0;
+                }
+            });
+
+
+            $("#showAll").on("click", function () {
+                $("#Category").hide();
+                $("#incexp").hide();
+                $("#all").show();
+                $("#showAll").hide();
+            });
+
+
+
+            $('#tabData').DataTable();
+
+        });
+
+    </script>
+}

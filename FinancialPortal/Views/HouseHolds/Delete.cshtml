@@ -1,0 +1,41 @@
+﻿@model FinancialPortal.Models.HouseHold
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div>
+    <h3>@Model.HouseHoldName HouseHold</h3>
+    <h5 class="text-danger">You are the last member to leave this household ? The household and all the attached bank accounts will be deleted.<br>Click delete to continue.</h5>
+</div>
+    <div class="smart-widget">
+        <div class="smart-widget-header">
+            Confirm
+            <span class="smart-widget-option">
+                <a href="#" class="widget-collapse-option" data-toggle="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+
+            </span>
+        </div>
+        <div class="smart-widget-inner">
+            <div class="smart-widget-body">
+                <dl class="dl-horizontal">
+                    <dt><strong>HouseHold</strong></dt>
+                    <dd>@Html.DisplayFor(model => model.HouseHoldName)</dd>
+                    <dt><strong>Created On</Strong></dt>
+                    <dd>@Model.CreatedDate.ToString("MMM dd, yyyy")</dd>
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-rounded text-white back-color" />
+                        <a href="@Url.Action("Details", "HouseHolds", new { id = Model.HouseHoldId })" class="btn btn-rounded text-white back-color">Cancel</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+

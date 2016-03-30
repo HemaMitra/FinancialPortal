@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav">
+        <li><a href="https://github.com/hemamitra" target="_blank" class="text-white back-color btn btn-rounded"><i class="fa fa-github"></i>GitHub</a></li>
+
+        <li><a href="https://hmitra.azurewebsites.net/Home/Contact" target="_blank" class="text-white back-color btn btn-rounded"><i class="fa fa-envelope-o"></i>Contact</a></li>
+        <li>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "text-white back-color btn btn-rounded" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="text-white back-color btn btn-rounded">Log off</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav">
+
+        <li><a href="https://github.com/hemamitra" target="_blank" class="btn btn-rounded text-white back-color"><i class="fa fa-github"></i>GitHub</a></li>
+
+        <li><a href="https://hmitra.azurewebsites.net/Home/Contact" target="_blank" class="btn btn-rounded text-white back-color"><i class="fa fa-envelope-o"></i>Contact</a></li>
+
+
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" ,@class="btn btn-rounded text-white back-color"})</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-rounded text-white back-color" })</li>
+    </ul>
+}

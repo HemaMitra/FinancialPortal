@@ -1,0 +1,58 @@
+﻿@model FinancialPortal.Models.Budget
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="smart-widget">
+    <div class="smart-widget-header">
+        Delete Budget Item
+        <span class="smart-widget-option">
+            <a href="#" class="widget-collapse-option" data-toggle="collapse">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </span>
+    </div>
+    <div class="smart-widget-inner">
+        <div class="smart-widget-body">
+            <div>
+                <h4 class="text-danger">Are you sure you want to delete this Budget Item ?</h4>
+
+                <table class="table">
+                    <tr class="strong">
+                        <td>Creation Date</td>
+                        <td>Category</td>
+                        <td>HouseHold</td>
+                        <td>Budget Amount</td>
+                        <td>IsWithdrawl</td>
+                        <td>Description</td>                        
+                    </tr>
+                    <tr>
+                        <td>@Model.BudgetCrtDate.ToString("MMM dd, yyyy")</td>
+                        <td>@Html.DisplayFor(model => model.Category.CategoryName)</td>
+                        <td>@Html.DisplayFor(model => model.HouseHold.HouseHoldName)</td>
+                        <td>@Html.DisplayFor(model => model.BudgetAmount)</td>
+                        <td>@Html.DisplayFor(model => model.IsWithdrawl)</td>
+                        <td>@Html.DisplayFor(model => model.BudgetDescription)</td>
+                    </tr>
+                </table>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-rounded text-white back-color" />
+                        <a href="@Url.Action("Index","Budgets")" class="btn btn-rounded text-white back-color">Back</a>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+

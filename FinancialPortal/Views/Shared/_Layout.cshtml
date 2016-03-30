@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Portal</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/css/morris.css" rel="stylesheet" />
+    <link href="~/css/datepicker.css" rel="stylesheet" />
+    <link href="~/css/animate.min.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/css/simplify.css" rel="stylesheet" />
+    <link href="~/Content/DataTables-1.10.10/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="wrapper preload">
+        
+        <header class="top-nav back-color">
+            <div class="top-nav-inner">
+                <div class="nav-header">
+                    <button type="button" class="navbar-toggle pull-left sidebar-toggle" id="sidebarToggleSM">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <ul class="nav-notification pull-right">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-cog fa-lg">
+                                </i>
+                            </a>
+                            <span class="badge badge-danger bounceIn">1</span>
+
+                            
+                            <ul class="dropdown-menu dropdown-sm pull-right user-dropdown">
+                                <li class="user-avatar lft-margin">
+                                    @Html.Partial("_LoginPartial")
+                                </li>
+
+                            </ul>
+                            
+                        </li>
+                    </ul>
+
+                    <a href="#" class="brand text-white">
+                        <i class="fa fa-money"></i><span class="brand-name text-white back">Mitras Budgeter</span>
+                    </a>
+                </div>
+                <div class="nav-container">
+                    @*<button type="button" class="navbar-toggle pull-left sidebar-toggle" id="sidebarToggleLG">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>*@
+                    
+                    <div class="pull-right m-right-sm">
+                        
+                        @Html.Partial("_LoginPartial")
+                    </div>
+
+                </div>
+            </div><!-- ./top-nav-inner -->
+        </header>
+        <aside class="sidebar-menu fixed">
+            <div class="sidebar-inner scrollable-sidebar">
+                <div class="main-menu">
+                    <ul class="accordion">
+                        <li class="menu-header">
+                            Main Menu
+                        </li>
+                        <li class="bg-palette1">
+                            <a href="@Url.Action("Charts", "HouseHolds")">
+                                <span class="text m-left-sm">Dashboard</span>
+                            </a>
+                            <li class="bg-palette1">
+                            <a href="@Url.Action("Details", "HouseHolds")">
+                                <span class="text m-left-sm">House Hold</span>
+                            </a>
+                            
+                        </li>
+                        <li class="bg-palette2">
+                            <a href="@Url.Action("Index", "BankAccounts")">
+                                <span class="menu-content block">
+                                    <span class="text m-left-sm">Bank Accounts</span>
+                                </span>
+                                
+                            </a>
+                        </li>
+                        <li class="bg-palette1">
+                            <a href="@Url.Action("Index", "Categories")">
+                                <span class="menu-content block">
+                                    <span class="text m-left-sm">Category</span>
+                                </span>
+                                
+                            </a>
+                        </li>
+                        <li class="bg-palette2">
+                            <a href="@Url.Action("Index","Budgets")">
+                                <span class="menu-content block">
+                                    <span class="text m-left-sm">Budget</span>
+                                </span>
+                                
+                            </a>
+                        </li>
+                        <li class="menu-header">
+                            Others
+                        </li>
+                        
+                    </ul>
+                </div>
+                
+            </div><!-- sidebar-inner -->
+        </aside>
+
+        <div class="main-container">
+            <div class="padding-md">
+        @RenderBody()        
+                
+            </div><!-- ./padding-md -->
+        </div><!-- /main-container -->
+        
+   
+    </div><!-- /wrapper -->
+    
+
+    <!-- Scripts Section -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables-1.10.10/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+
+
+    @*<script src="~/js/jquery.flot.min.js"></script>*@
+    <!-- Slimscroll -->
+    <script src='~/js/jquery.slimscroll.min.js'></script>
+
+    <!-- Morris -->
+    <script src='~/js/rapheal.min.js'></script>
+    <script src='~/js/morris.min.js'></script>
+    <!-- Datepicker -->
+    <script src='~/js/uncompressed/datepicker.js'></script>
+    <!-- Sparkline -->
+    <script src='~/js/sparkline.min.js'></script>
+    <!-- Skycons -->
+    <script src='~/js/uncompressed/skycons.js'></script>
+
+    <!-- Popup Overlay -->
+    <script src='~/js/jquery.popupoverlay.min.js'></script>
+    <!-- Easy Pie Chart -->
+    <script src='~/js/jquery.easypiechart.min.js'></script>
+    <!-- Sortable -->
+    <script src='~/js/uncompressed/jquery.sortable.js'></script>
+    <!-- Owl Carousel -->
+    <script src='~/js/owl.carousel.min.js'></script>
+    <!-- Modernizr -->
+    <script src='~/js/modernizr.min.js'></script>
+
+    <!-- Simplify -->
+    <script src="~/js/simplify/simplify.js"></script>
+    @*<script src="~/js/simplify/simplify_dashboard.js"></script>*@
+    
+    
+    <script type="text/javascript">
+    $(function () {
+        $('.chart').easyPieChart({
+            easing: 'easeOutBounce',
+            size: '140',
+            lineWidth: '7',
+            barColor: '#7266ba',
+            onStep: function (from, to, percent) {
+                $(this.el).find('.percent').text(Math.round(percent));
+            }
+        });
+
+        $('.sortable-list').sortable();
+
+        $('.todo-checkbox').click(function () {
+
+            var _activeCheckbox = $(this).find('input[type="checkbox"]');
+
+            if (_activeCheckbox.is(':checked')) {
+                $(this).parent().addClass('selected');
+            }
+            else {
+                $(this).parent().removeClass('selected');
+            }
+
+        });
+
+        //Delete Widget Confirmation
+        $('#deleteWidgetConfirm').popup({
+            vertical: 'top',
+            pagecontainer: '.container',
+            transition: 'all 0.3s'
+        });
+    });
+
+    </script>
+
+
+
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+

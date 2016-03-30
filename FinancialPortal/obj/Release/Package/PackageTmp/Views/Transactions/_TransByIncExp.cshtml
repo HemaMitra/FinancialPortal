@@ -1,0 +1,76 @@
+﻿@model IEnumerable<FinancialPortal.Models.Transaction>
+
+    <div class="smart-widget">
+        <div class="smart-widget-header">
+            Income
+            <span class="smart-widget-option">
+                <a href="#" class="widget-collapse-option" data-toggle="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </span>
+        </div><div class="smart-widget-inner">
+            <div class="smart-widget-body">
+                <table class="table">
+                    <tr class="strong">
+                        <td class="table-padding">Bank Account</td>
+                        <td class="table-padding">Transaction Date</td>
+                        <td class="table-padding">Transaction Amount</td>
+                        <td class="table-padding">Reconciliation Amount</td>
+                        <td>Is Withdrawl ?</td>
+                    </tr>
+
+                    @foreach (var item1 in Model)
+                    {
+                        if (item1.IsWithdrawl == false)
+                        {
+                            <tr>
+                                <td>@item1.BankAccount.AccountName</td>
+                                <td>@item1.TransactionDate.ToString("MMM dd, yyyy")</td>
+                                <td>@item1.TransactionAmount</td>
+                                <td>@item1.ReconciliationAmount</td>
+                                <td>@item1.IsWithdrawl</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+<br><br>
+<div class="smart-widget">
+    <div class="smart-widget-header">
+        Expense
+        <span class="smart-widget-option">
+            <a href="#" class="widget-collapse-option" data-toggle="collapse">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </span>
+    </div><div class="smart-widget-inner">
+        <div class="smart-widget-body">
+            <table class="table">
+                <tr class="strong">
+                    <td class="table-padding">Bank Account</td>
+                    <td class="table-padding">Transaction Date</td>
+                    <td class="table-padding">Transaction Amount</td>
+                    <td class="table-padding">Reconciliation Amount</td>
+                    <td>Is Withdrawl ?</td>
+                </tr>
+
+                @foreach (var item1 in Model)
+                {
+                    if (item1.IsWithdrawl == true)
+                    {
+                        <tr>
+                            <td>@item1.BankAccount.AccountName</td>
+                            <td>@item1.TransactionDate.ToString("MMM dd, yyyy")</td>
+                            <td>@item1.TransactionAmount</td>
+                            <td>@item1.ReconciliationAmount</td>
+                            <td>@item1.IsWithdrawl</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>

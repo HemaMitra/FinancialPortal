@@ -1,0 +1,31 @@
+﻿@*@model IEnumerable<FinancialPortal.Models.HouseHold>*@
+@model FinancialPortal.Models.HouseHold
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New HouseHold", "Create")*@
+    <table class="table">
+        <tr class="font-semi-bold">
+            <th>HoseHold Name</th>
+            <th>Created Date</th>
+            <th></th>
+        </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.HouseHoldName)
+                </td>
+                <td>
+                    @Model.CreatedDate.ToString("MMM dd, yyyy")
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "HouseHolds", new { id = Model.HouseHoldId })" class="btn btn-rounded text-white back-color"><i class="fa fa-book"></i></a>
+                </td>
+            </tr>
+    </table>
+
+    @*<h3>@TempData["Message"]</h3>*@

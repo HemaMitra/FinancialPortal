@@ -1,0 +1,85 @@
+﻿@model IEnumerable<FinancialPortal.Models.BankAccount>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
+}
+<p>
+<h4>Linked Bank Accounts</h4>
+    <a href="@Url.Action("Create","BankAccounts")" class="btn btn-rounded back-color text-white">Create New</a>
+</p>
+
+<p>
+
+    <table id="tabData" class="table">
+        <thead>
+            <tr class="font-semi-bold">
+                <th>@Html.DisplayNameFor(model => model.AccountName)</th>
+                <th>@Html.DisplayNameFor(model => model.Balance)</th>
+                <th>@Html.DisplayNameFor(model => model.CreatedDate)</th>
+                <th></th>
+
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+                <td>
+                    @item.CreatedDate.ToString("MMM dd, yyyy")
+                </td>
+                <td>
+                    @*<a href="@Url.Action("Details", "BankAccounts", new { id = item.BankAccountId })" class="btn btn-sm btn-rounded back-color text-white">
+                        <i class="fa fa-book" title="Details"></i>
+                    </a>*@
+
+
+                    <a href="@Url.Action("Edit", "BankAccounts", new { id = item.BankAccountId })" class="btn btn-sm btn-rounded back-color text-white">
+                        <i class="fa fa-edit" title="Edit"></i>
+                    </a>
+
+                    @*<a href="#" data-id="item.BankAccountId" class="btn btn-sm btn-rounded back-color text-white editBank">
+                        <i class="fa fa-edit" title="Edit"></i>
+                    </a>*@
+
+
+                    <a href="@Url.Action("Delete", "BankAccounts", new { id = item.BankAccountId })" class="btn btn-sm btn-rounded back-color text-white">
+                        <i class="fa fa-trash-o" title="Delete"></i>
+                    </a>
+
+                    <a href="@Url.Action("Index", "Transactions", new { BankAccountId = item.BankAccountId })" class="btn btn-sm btn-rounded back-color text-white">
+                        <i class="fa fa-arrows-h" title="View Transactions"></i>
+                    </a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @*<div id="displayEdit">
+        @Html.Partial("_Edit")
+    </div>*@
+
+
+
+@section scripts
+{
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabData').DataTable();
+
+            //For Partial View
+            //$(".editBank").click(function () {
+            //    alert("Hi");
+            //    $('#displayEdit').load('/BankAccounts/_Edit/' + $(this).data("id"));
+            //});
+        });
+
+        </script>
+}

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<FinancialPortal.Models.BankAccount>
+
+@{
+    ViewBag.Title = "Attached Accounts";
+}
+
+<div class="smart-widget">
+    <div class="smart-widget-header">
+        Attached Bank Accounts
+    </div>
+    <div class="smart-widget-inner">
+        <div class="smart-widget-body">
+            <div>
+                <table class="table table-border">
+                    <tr class="font-semi-bold">
+                        <td class="table-padding">Account Name</td>
+                        <td class="table-padding">Balance</td>
+                        @*<td>View Transactions</td>*@
+                    </tr>   
+                    
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.AccountName)</td>
+                            <td>@Html.DisplayFor(m => item.Balance)</td>
+                            <td><a href="@Url.Action("Index", "Transactions", new { BankAccountId = item.BankAccountId })" class="btn btn-sm btn-rounded back-color text-white"><i class="fa fa-arrows-h" title="View Transactions"></i></a></td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            @*<a href="@Url.Action("Details", "HouseHolds", new { id = @TempData["id"]})" class="btn btn-rounded text-white back-color">Back</a>*@
+        </div>
+    </div>
+</div>

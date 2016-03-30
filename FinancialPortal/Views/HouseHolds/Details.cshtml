@@ -1,0 +1,140 @@
+﻿@model FinancialPortal.Models.HouseHold
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>@Html.DisplayFor(model => model.HouseHoldName) HouseHold</h4>
+    <h6>Created On @Model.CreatedDate.ToString("MMM dd, yyyy")</h6>
+</div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            @Html.Action("_IncomeExpense", "Transactions")
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-2 col-sm-2">
+            <a href="@Url.Action("Edit", "HouseHolds", new { id = Model.HouseHoldId })" class="btn btn-rounded back-color text-white">Edit HouseHold</a><br><br>
+        </div>    
+        <div class="col-md-2 col-sm-2">
+            <a href="" class="invite btn btn-rounded back-color text-white" data-toggle="modal" data-target="#invite" data-hhid="@Model.HouseHoldId">Invite Member</a><br><br>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <a href="#" class="btn btn-rounded back-color text-white" id="viewMember" data-mhhid="@Model.HouseHoldId">View Members</a><br><br>
+        </div>
+
+        <div class="col-md-2 col-sm-2">
+            <a href="" class="leave btn btn-rounded back-color text-white" data-toggle="modal" data-target="#leave" data-lhhid="@Model.HouseHoldId">Leave HouseHold
+            </a><br><br>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <a href="#" class="btn btn-rounded back-color text-white" id="viewAccount" data-ahhid="@Model.HouseHoldId">Attached Accounts</a><br><br>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <a href="@Url.Action("Create", "Categories")" class="btn btn-rounded back-color text-white">Create Category</a>
+        </div>
+    </div><br>
+
+<div class="row">
+    <div class="col-md-6 col-xs-6">
+        <div id="viewMembers"></div>
+    </div>
+    <div class="col-md-6 col-xs-6">
+        <div id="viewAccounts"></div>
+    </div>
+</div>
+
+
+
+
+
+
+        <div class="modal fade" id="invite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Invite</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="@Url.Action("Invite")" method="post" enctype="multipart/form-data" role="form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="HouseHoldId" name="HouseHoldId" />
+                            Email : <input type="text" class="form-control" id="MemberEmail" name="MemberEmail">
+                            <br>
+                            <input type="submit" value="Submit" class="btn btn-rounded back-color text-white col-md-offset-4" />
+                            <button type="button" class="btn btn-rounded back-color text-white" data-dismiss="modal">Cancel</button>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Modal for edit clopsed -->
+        <!--  Modal for Leave -->
+
+        <div class="modal fade" id="leave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Leave HouseHold</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="@Url.Action("LeaveHouseHold","HouseHolds")" method="post" enctype="multipart/form-data" role="form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="LHouseHoldId" name="HouseHoldId" />
+                            Are you sure you want to leave this household ?<br><br>
+
+                            <input type="submit" value="Submit" class="btn btn-rounded back-color text-white col-md-offset-4" />
+                            <button type="button" class="btn btn-rounded back-color text-white" data-dismiss="modal">Cancel</button>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Modal for Leave closed -->
+        @section Scripts{
+            <script type="text/javascript">
+                $('.invite').click(function () {
+                    $('#HouseHoldId').val($(this).attr("data-hhId"));
+                })
+                $('.back').click(function () {
+
+
+                })
+
+                $('.join').click(function () {
+                    $('#JHouseHoldId').val($(this).attr("data-jhhId"));
+                })
+
+
+                $('.leave').click(function () {
+                    $('#LHouseHoldId').val($(this).attr("data-lhhId"));
+                })
+
+                //Load Partial View to see houehold members
+                $("#viewMember").click(function () {
+                    $('#viewMembers').load('/HouseHolds/_ViewMembers/' + $(this).data("mhhid"));
+                });
+
+                //Load Partial View to see linked accounts
+                $("#viewAccount").click(function () {
+                    $('#viewAccounts').load('/HouseHolds/_ViewAccounts/' + $(this).data("ahhid"));
+                });
+
+
+            </script>
+        }
+
+
+
+
